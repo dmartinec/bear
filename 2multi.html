@@ -22,5 +22,5 @@ layout: page
     results.innerHTML = `<br/><img src="${imageUrl}" width="300"> <p>${label}</p>`;
   }
 
-  photo.addEventListener('input', () => { [...photos.files].map(predict) });
+  photos.addEventListener('input', () => { [...photos.files].map(predict) });
 </script>
