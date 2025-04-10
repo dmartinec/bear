@@ -10,27 +10,23 @@ layout: page
 
 <script>
     async function get_pred(file) {
-        return new Promise(async resolve => {
-            // Use CDN instead of a local import('@gradio/client')
-            const { Client } = await import('https://cdn.jsdelivr.net/npm/@gradio/client/dist/index.min.js');
+        // Use CDN instead of a local import('@gradio/client')
+        const { Client } = await import('https://cdn.jsdelivr.net/npm/@gradio/client/dist/index.min.js');
 
-            const client = await Client.connect("danielmartinec/minima");
-            const response = await client.predict("/predict", { 
-              im: file,
-            });
+        const client = await Client.connect("danielmartinec/minima");
+        const response = await client.predict("/predict", { 
+          im: file,
+        });
 
-            // TODO: Remove prediction
-            const prediction = response.data[0]['confidences'][0];
-            const label = response.data[0]['confidences'][0]['label'];
-            
-            // Create a URL for display (since we're not using FileReader)
-            const imageUrl = URL.createObjectURL(file);
+        const prediction = response.data[0]['confidences'][0];
+        
+        // Create a URL for display (since we're not using FileReader)
+        const imageUrl = URL.createObjectURL(file);
 
-            const div = document.createElement('div');
-            div.innerHTML = `<img class="prediction" src="${imageUrl}" width="300"> <p>${label}</p>`
-            results.append(div);
-            return resolve(prediction)
-        })
+        const div = document.createElement('div');
+        div.innerHTML = `<img class="prediction" src="${imageUrl}" width="300"> <p>${prediction['label']}</p>`
+        results.append(div);
+        return prediction; // Implicitly wrapped in a promise
     }
     photos.addEventListener('input', async () => {
         results.innerHTML = "";
