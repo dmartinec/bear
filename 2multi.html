@@ -19,6 +19,7 @@ layout: page
     // Create a URL for display (since we're not using FileReader)
     const imageUrl = URL.createObjectURL(file);
 
+    const div = document.createElement('div');
     div.innerHTML = `<br/><img src="${imageUrl}" width="300"> <p>${label}</p>`
     document.body.append(div);
   }
