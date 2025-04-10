@@ -19,7 +19,8 @@ layout: page
     // Create a URL for display (since we're not using FileReader)
     const imageUrl = URL.createObjectURL(file);
 
-    results.innerHTML = `<br/><img src="${imageUrl}" width="300"> <p>${label}</p>`;
+    div.innerHTML = `<br/><img src="${imageUrl}" width="300"> <p>${label}</p>`
+    document.body.append(div);
   }
 
   photos.addEventListener('input', () => { [...photos.files].map(predict) });
