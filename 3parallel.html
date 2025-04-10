@@ -15,15 +15,15 @@ layout: page
       im: file,
     });
 
-    const prediction = response.data[0]['confidences'][0];
+    const label = response.data[0]['confidences'][0]['label'];
     
     // Create a URL for display (since we're not using FileReader)
     const imageUrl = URL.createObjectURL(file);
 
     const div = document.createElement('div');
-    div.innerHTML = `<img class="prediction" src="${imageUrl}" width="300"> <p>${prediction['label']}</p>`
+    div.innerHTML = `<br/><img src="${imageUrl}" width="300"> <p>${label}</p>`
     results.append(div);
-    return prediction; // Implicitly wrapped in a promise
+    resolve();
   }
   photos.addEventListener('input', async () => {
     results.innerHTML = "";
