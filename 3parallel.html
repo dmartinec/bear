@@ -26,7 +26,6 @@ layout: page
   }
 
   photos.addEventListener('input', async () => {
-    results.innerHTML = "";
     await Promise.allSettled([...photos.files].map(predict));
   });
 </script>
