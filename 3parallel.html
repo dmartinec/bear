@@ -20,7 +20,7 @@ layout: page
             });
 
             // TODO: Remove prediction
-            const prediction = json['data'][0]['confidences'][0];
+            const prediction = response.data[0]['confidences'][0];
             const label = response.data[0]['confidences'][0]['label'];
             
             // Create a URL for display (since we're not using FileReader)
